@@ -1,6 +1,6 @@
 module validate-label
 
-go 1.23.2
+go 1.23.1
 
 require (
 	k8s.io/api v0.31.1

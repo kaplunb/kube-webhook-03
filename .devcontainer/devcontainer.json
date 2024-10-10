@@ -1,12 +1,6 @@
 {
     "name": "Kube webhook 03 dev container",
-    "image": "mcr.microsoft.com/devcontainers/base:jammy",
-    "features": {
-        "ghcr.io/devcontainers/features/go:1": {
-            "version": "latest"
-        },
-        "ghcr.io/devcontainers/features/docker-in-docker:2": {}
-    },
+    "image": "mcr.microsoft.com/devcontainers/go",
     "customizations": {
         "vscode": {
             "extensions": [
@@ -19,9 +13,9 @@
                 "go.useLanguageServer": true,
                 "go.gopath": "/go"
             },
-            "shell": "/bin/bash"
+            "shell": "/bin/sh"
         }
     },
     "remoteUser": "vscode",
-    "postCreateCommand": "/bin/bash"
+    "postCreateCommand": "/bin/sh"
 }

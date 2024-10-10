@@ -1,0 +1,27 @@
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: validating-webhook-cfg
+  annotations:
+    cert-manager.io/inject-ca-from: webhook-system/validating-webhook-tls
+webhooks:
+  - name: validating-webhook.webhook-system.svc
+    clientConfig:
+      service:
+        name: validating-webhook-svc
+        namespace: webhook-system
+        path: "/validate"
+      caBundle: "${CA Bundle}" 
+    rules:
+      - apiGroups: [""]
+        apiVersions: ["v1"]
+        operations: ["CREATE", "UPDATE"]
+        resources: ["pods"]
+        scope: "Namespaced"
+    failurePolicy: Fail
+    sideEffects: None
+    admissionReviewVersions: ["v1", "v1beta1"]
+    timeoutSeconds: 5
+    namespaceSelector:
+      matchLabels:
+        kubernetes.io/metadata.name: webhook-system
